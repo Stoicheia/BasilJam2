@@ -3,6 +3,7 @@ using Cutscene;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Game
@@ -14,6 +15,8 @@ namespace Game
         [Header("Screens")]
         [SerializeField] private SlideUI _endScreenAnim;
         [SerializeField] private EndScreen _endScreen;
+        [SerializeField] private SlideUI _correctScreenAnim;
+        [SerializeField] private SlideUI _wrongScreenAnim;
 
         [Header("Game Config")]
         [SerializeField] private string _nameOfCorrectCharacter;
@@ -64,11 +67,20 @@ namespace Game
             if (c.Name == _nameOfCorrectCharacter)
             {
                 Debug.Log("You were right");
+                _ = _endScreenAnim.Close();
+                _ = _correctScreenAnim.Open();
             }
             else
             {
                 Debug.Log("You were wrong");
+                _ = _endScreenAnim.Close();
+                _ = _wrongScreenAnim.Open();
             }
+        }
+
+        public void ReloadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
