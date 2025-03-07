@@ -7,6 +7,7 @@ namespace World
     public class ObjectLocation : MonoBehaviour
     {
         private Collider _collider;
+        [field: SerializeField] public Transform Anchor { get; private set; }
 
         private void Awake()
         {
