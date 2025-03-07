@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cutscene;
 using Sirenix.OdinInspector;
 using UI;
@@ -10,7 +11,8 @@ namespace Game
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField] private CutsceneManager _cutsceneManager;
+        private int _totalActCount => _cutsceneManagers.Count;
+        [SerializeField] private List<CutsceneManager> _cutsceneManagers;
         
         [Header("Screens")]
         [SerializeField] private SlideUI _endScreenAnim;
@@ -20,6 +22,10 @@ namespace Game
 
         [Header("Game Config")]
         [SerializeField] private string _nameOfCorrectCharacter;
+
+        [Header("State")] 
+        [SerializeField] [ReadOnly] private int _actIndex;
+        [SerializeField] [ReadOnly] private CutsceneManager _activeCutscene;
 
         [Header("Debug")] 
         [SerializeField] private bool _debugMode;
@@ -43,7 +49,7 @@ namespace Game
 
         public void StartGame()
         {
-            _cutsceneManager.PlayFromStart();
+            PlayAct(0);
         }
 
         private void Update()
@@ -62,25 +68,50 @@ namespace Game
             }
         }
         
-        private void HandleSelectCharacter(CharacterInfo c)
+        private async void HandleSelectCharacter(CharacterInfo c)
         {
             if (c.Name == _nameOfCorrectCharacter)
             {
                 Debug.Log("You were right");
+                await _correctScreenAnim.Open();
                 _ = _endScreenAnim.Close();
-                _ = _correctScreenAnim.Open();
             }
             else
             {
                 Debug.Log("You were wrong");
+                await _wrongScreenAnim.Open();
                 _ = _endScreenAnim.Close();
-                _ = _wrongScreenAnim.Open();
             }
         }
 
         public void ReloadScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        [Button]
+        public void PlayAct(int index)
+        {
+            if (_activeCutscene != null)
+            {
+                _activeCutscene.Pause();
+            }
+            _actIndex = index;
+            _activeCutscene = _cutsceneManagers[index];
+            _activeCutscene.PlayFromStart();
+        }
+        
+        public void OnNextAct()
+        {
+            _actIndex++;
+            if (_actIndex >= _totalActCount)
+            {
+                _ = _endScreenAnim.Open();
+            }
+            else
+            {
+                PlayAct(_actIndex);
+            }
         }
     }
 }
