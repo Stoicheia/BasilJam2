@@ -30,6 +30,7 @@ namespace Game
         private void OnEnable()
         {
             _selectButton.onClick.AddListener(HandleConfirm);
+            RenderCharacters();
         }
         
         private void OnDisable()

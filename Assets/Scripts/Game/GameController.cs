@@ -1,4 +1,5 @@
 using System;
+using Cutscene;
 using Sirenix.OdinInspector;
 using UI;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Game
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private CutsceneManager _cutsceneManager;
+        
         [Header("Screens")]
         [SerializeField] private SlideUI _endScreenAnim;
         [SerializeField] private EndScreen _endScreen;
@@ -32,6 +35,12 @@ namespace Game
         private void Start()
         {
             _endScreenAnim.CloseImmediate();
+            StartGame();
+        }
+
+        public void StartGame()
+        {
+            _cutsceneManager.PlayFromStart();
         }
 
         private void Update()
