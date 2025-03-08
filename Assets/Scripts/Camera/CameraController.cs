@@ -9,9 +9,9 @@ namespace Cams
 {
     public class CameraController : MonoBehaviour
     {
-        public CameraInfo ActiveCamera { get; private set; }
+        public SubCamera ActiveSubCamera { get; private set; }
         
-        [SerializeField] private List<CameraInfo> _virtualCameras;
+        [SerializeField] private List<SubCamera> _virtualCameras;
         [SerializeField] private CinemachineBrain _brain;
 
         private void Awake()
@@ -20,10 +20,16 @@ namespace Cams
         }
 
         [Button]
-        public CameraInfo SwitchCamera(int index)
+        public SubCamera SwitchCamera(int index)
         {
-            CameraInfo activeCamInfo = _virtualCameras[index % _virtualCameras.Count];
-            CinemachineCamera activeCam = activeCamInfo.Camera;
+            SubCamera activeCamInfo = _virtualCameras[index % _virtualCameras.Count];
+            SwitchCamera(activeCamInfo);
+            return activeCamInfo;
+        }
+
+        public void SwitchCamera(SubCamera cam)
+        {
+            CinemachineCamera activeCam = cam.Camera;
             foreach (var c in _virtualCameras)
             {
                 if (c.Camera == activeCam)
@@ -36,14 +42,18 @@ namespace Cams
                 }
             }
             
-            ActiveCamera = activeCamInfo;
-            return activeCamInfo;
+            ActiveSubCamera = cam;
+        }
+
+        public int GetIndexOf(SubCamera cam)
+        {
+            return _virtualCameras.IndexOf(cam);
         }
 
         [Button]
         public void GetVirtualCameras()
         {
-            _virtualCameras = GetComponentsInChildren<CameraInfo>(true).ToList();
+            _virtualCameras = GetComponentsInChildren<SubCamera>(true).ToList();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Cams
 {
     public class CameraSwitcher : MonoBehaviour
     {
-        public CameraInfo ActiveCamera => _controller.ActiveCamera;
+        public static event Action<SubCamera> OnSwitchCamera;
+        public SubCamera ActiveSubCamera => _controller.ActiveSubCamera;
         
         [SerializeField] private CameraController _controller;
         [SerializeField] private BlackSlides _slides;
@@ -44,7 +45,22 @@ namespace Cams
             //_ = _pp.Close();
             await _slides.Close(_closeTime);
             _controller.SwitchCamera(index);
+            OnSwitchCamera?.Invoke(ActiveSubCamera);
             _cameraIndex = index;
+            await Task.Delay((int)(_stayTime*1000));
+            _ = _pp.Open();
+            await _slides.Open(_openTime);
+            State = CameraState.Free;
+        }
+
+        public async Task SwitchCamera(SubCamera subCamera)
+        {
+            State = CameraState.Closing;
+            //_ = _pp.Close();
+            await _slides.Close(_closeTime);
+            _controller.SwitchCamera(subCamera);
+            OnSwitchCamera?.Invoke(ActiveSubCamera);
+            _cameraIndex = _controller.GetIndexOf(subCamera);
             await Task.Delay((int)(_stayTime*1000));
             _ = _pp.Open();
             await _slides.Open(_openTime);

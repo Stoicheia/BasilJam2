@@ -12,7 +12,7 @@ namespace UI
 
         private void Update()
         {
-            _cameraNameField.text = _cameraSwitcher.ActiveCamera.Name;
+            _cameraNameField.text = _cameraSwitcher.ActiveSubCamera.Name;
         }
     }
 }

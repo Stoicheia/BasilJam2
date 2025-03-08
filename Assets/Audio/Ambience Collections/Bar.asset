@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d1e98614141d2995eda3fb35701e0, type: 3}
+  m_Name: Bar
+  m_EditorClassIdentifier: 
+  AmbienceSequence:
+  - Index: 0
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: 8c4f362bc655e8c45910fa3339bafe87, type: 3}
+    Volume: 1
+  - Index: 1
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: 4df104f0a864f6b4c9085343f22a036d, type: 3}
+    Volume: 1
+  - Index: 2
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: c657ecde572844f42980b6049e54cbbf, type: 3}
+    Volume: 1
+  - Index: 3
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: c657ecde572844f42980b6049e54cbbf, type: 3}
+    Volume: 0.747
+  - Index: 12
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: c657ecde572844f42980b6049e54cbbf, type: 3}
+    Volume: 0.754
+  - Index: 13
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: 126af9d0bca0c814685c4749969fa8ad, type: 3}
+    Volume: 1
+  - Index: 16
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: c657ecde572844f42980b6049e54cbbf, type: 3}
+    Volume: 0.771
+  - Index: 9
+    OneShot: 1
+    Clip: {fileID: 8300000, guid: 7f1df728941731b4ab30cfefa6df57d2, type: 3}
+    Volume: 0.753

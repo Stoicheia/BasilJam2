@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d1e98614141d2995eda3fb35701e0, type: 3}
+  m_Name: Hallway 2
+  m_EditorClassIdentifier: 
+  AmbienceSequence:
+  - Index: 0
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: a3eb262fc04b76945a7da078b524f7cb, type: 3}
+    Volume: 0.305
+  - Index: 1
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 2
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 4
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 5
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: a3eb262fc04b76945a7da078b524f7cb, type: 3}
+    Volume: 0.291
+  - Index: 7
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 8
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: 894b7a6106f4b204fa54339b58fc3148, type: 3}
+    Volume: 1
+  - Index: 10
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 11
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: 176423dc73fa2d94c87004fca863b7ca, type: 3}
+    Volume: 1
+  - Index: 16
+    OneShot: 0
+    Clip: {fileID: 8300000, guid: b15e013075492e74ab00c42488a381ec, type: 3}
+    Volume: 1
+  - Index: 9
+    OneShot: 1
+    Clip: {fileID: 8300000, guid: 7f1df728941731b4ab30cfefa6df57d2, type: 3}
+    Volume: 1
