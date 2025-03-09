@@ -23,10 +23,19 @@ namespace Minigame
             Parent.OnReachTarget -= HandleReachTarget;
         }
         
-        private void HandleReachTarget(MoveLogic _)
+        private void HandleReachTarget(MoveLogic target)
         {
+            if (!Parent.HasObject())
+            {
+                Parent.AI = new SearcherAI();
+                return;
+            }
             Debug.Log($"{Parent.name} reached target (murderer)");
-            MurderGame.Instance.MurderHappened(Parent);
+            if (MurderGame.Instance.MurderHappened(Parent))
+            {
+                target.Follow.ReceiveInteraction(Parent);
+            }
+            
             Parent.AI = new VictimFleerAI();
         }
     }

@@ -31,7 +31,14 @@ namespace Minigame
             if (pickable != null)
             {
                 Parent.AttachObject(pickable.transform);
-                Parent.AI = new MurdererAI();
+                if (MurderGame.Instance.HasFreeTable)
+                {
+                    Parent.AI = new TablingAI();
+                }
+                else
+                {
+                    Parent.AI = new MurdererAI();
+                }
             }
             else
             {

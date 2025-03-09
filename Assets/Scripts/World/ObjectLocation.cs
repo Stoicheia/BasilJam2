@@ -1,4 +1,5 @@
 using System;
+using Minigame;
 using UnityEngine;
 
 namespace World
@@ -7,11 +8,14 @@ namespace World
     public class ObjectLocation : MonoBehaviour
     {
         private Collider _collider;
+        public Waypoint Waypoint;
         [field: SerializeField] public Transform Anchor { get; private set; }
 
         private void Awake()
         {
             _collider = GetComponent<Collider>();
         }
+        
+        public bool HasObject => Anchor.GetComponentInChildren<SpriteRenderer>();
     }
 }

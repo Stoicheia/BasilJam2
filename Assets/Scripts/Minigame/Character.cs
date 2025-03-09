@@ -13,7 +13,7 @@ namespace Minigame
     public class Character : SerializedMonoBehaviour
     {
         public const float OBJECT_SEARCH_RADIUS = 10;
-        public const float MURDER_RADIUS = 1f;
+        public const float MURDER_RADIUS = 0.11f;
         public event Action<MoveLogic> OnReachTarget;
 
         public CharacterAI AI
@@ -71,10 +71,10 @@ namespace Minigame
                 case MoveMode.Follow:
                     _agent.speed = _moveSpeedFollow;
                     _agent.acceleration = _accelerationFollow;
-                    _agent.destination = MoveLogic.Follow.transform.position;
-                    if (IsCloseToTarget(MURDER_RADIUS))
+                    Vector3 pos = MoveLogic.Follow.transform.position;
+                    _agent.destination = new Vector3(pos.x, -0.23f, pos.z);
+                    if (Vector3.Distance(transform.position, MoveLogic.Follow.transform.position) < MURDER_RADIUS)
                     {
-                        MoveLogic.Follow.ReceiveInteraction(this);
                         OnReachTarget?.Invoke(MoveLogic);
                     }
                     break;
@@ -86,7 +86,7 @@ namespace Minigame
 
         private bool IsCloseToTarget(float threshold)
         {
-            return _agent.remainingDistance <= threshold;
+            return !_agent.pathPending && _agent.remainingDistance <= threshold;
         }
 
         public void SetWaypointTarget(Waypoint point)
@@ -175,10 +175,31 @@ namespace Minigame
             existingObject.transform.position = target.Anchor.position;
             existingObject.transform.parent = target.transform;
         }
+        
+        [Button]
+        public void DetachObject()
+        {
+            SpriteRenderer existingObject = _objectAnchor.GetComponentInChildren<SpriteRenderer>();
+            if (existingObject == null)
+            {
+                Debug.LogError("Attempted to detach object with no object attached");
+                return;
+            }
+            existingObject.transform.parent = null;
+        }
 
         public void ReceiveInteraction(Character follower)
         {
             Debug.Log($"Interacted by {follower.name}");
+            Transform grave = MurderGame.Instance.GravestonePrefab;
+            Instantiate(grave, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
+
+        public bool HasObject()
+        {
+            SpriteRenderer existingObject = _objectAnchor.GetComponentInChildren<SpriteRenderer>();
+            return existingObject != null;
         }
     }
 

@@ -5,12 +5,18 @@ using System.Linq;
 using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
+using World;
 
 namespace Minigame
 {
     public class MurderGame : SingletonMonoBehaviour<MurderGame>
     {
         public Character Victim;
+        public bool WasMurdered;
+        public Transform GravestonePrefab;
+        public List<ObjectLocation> Tables;
+        public ObjectLocation RandomTable => Tables.First(x => !x.HasObject);
+        public bool HasFreeTable => Tables.Any(x => !x.HasObject);
         [SerializeField] private Transform _waypointsRoot;
         [SerializeField] private Transform _fleeWaypointsRoot;
         [SerializeField] private List<Waypoint> _waypoints;
@@ -20,6 +26,7 @@ namespace Minigame
 
         private void Start()
         {
+            WasMurdered = false;
             _waypoints = _waypointsRoot.GetComponentsInChildren<Waypoint>().ToList();
             _waypoints.ForEach(x => x.ToggleGuideGraphics(false));
             _fleeWaypoints = _fleeWaypointsRoot.GetComponentsInChildren<Waypoint>().ToList();
@@ -34,9 +41,12 @@ namespace Minigame
             Victim.AI = new VictimFleerAI();
         }
 
-        public void MurderHappened(Character murderer)
+        public bool MurderHappened(Character murderer)
         {
+            if (WasMurdered) return false;
             Debug.Log($"{murderer} did it.");
+            WasMurdered = true;
+            return true;
         }
 
         public void EndGame()
