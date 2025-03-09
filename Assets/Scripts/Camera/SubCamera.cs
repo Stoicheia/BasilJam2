@@ -60,7 +60,7 @@ namespace Cams
                 _currentPanAngle += PanSpeed * Time.deltaTime;
             }
             _currentPanAngle = Mathf.Clamp(_currentPanAngle, _panMin, _panMax);
-            UpdateRotation();
+            //UpdateRotation();
         }
 
         private void UpdateRotation()

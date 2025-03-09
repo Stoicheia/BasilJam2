@@ -34,6 +34,7 @@ namespace Minigame
             if (!_objectLocation.HasObject)
             {
                 Parent.PlaceObjectOnNearestLocation();
+                Parent.Severity = Severity.OnceCarriedKnife;
                 Parent.AI = new SearcherAI();
             }
             else

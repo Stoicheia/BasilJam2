@@ -16,6 +16,16 @@ namespace World
             _collider = GetComponent<Collider>();
         }
         
-        public bool HasObject => Anchor.GetComponentInChildren<SpriteRenderer>();
+        public bool HasObject => GetComponentInChildren<SpriteRenderer>() != null;
+
+        public void Attach(PickableObject obj)
+        {
+            Waypoint.Object = obj;
+        }
+
+        public void Detach()
+        {
+            Waypoint.Object = null;
+        }
     }
 }

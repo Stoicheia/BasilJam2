@@ -31,6 +31,11 @@ namespace Minigame
             if (pickable != null)
             {
                 Parent.AttachObject(pickable.transform);
+                if (Parent.Severity != Severity.IsTheMurderer && Parent.Severity != Severity.IsMurdering)
+                {
+                    Parent.Severity = Severity.IsCarryingKnife;
+                }
+                reached.Object = null;
                 if (MurderGame.Instance.HasFreeTable)
                 {
                     Parent.AI = new TablingAI();

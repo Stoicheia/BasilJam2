@@ -46,9 +46,12 @@ namespace Minigame
         [SerializeField] protected float _moveSpeedFollow;
         [SerializeField] protected float _accelerationFollow;
 
+        public Severity Severity;
+
         private void Start()
         {
             _agent.updateRotation = false;
+            Severity = Severity.NoKnife;
         }
 
         private void Update()
@@ -215,5 +218,11 @@ namespace Minigame
     public enum MoveMode
     {
         Still, Point, Follow
+    }
+
+    [Serializable]
+    public enum Severity
+    {
+        NoKnife, OnceCarriedKnife, IsCarryingKnife, IsMurdering, IsTheMurderer
     }
 }

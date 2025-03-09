@@ -11,6 +11,8 @@ namespace Minigame
         {
             Parent.SetFollowTarget(MurderGame.Instance.Victim);
             Parent.OnReachTarget += HandleReachTarget;
+            if(Parent.Severity != Severity.IsTheMurderer)
+                Parent.Severity = Severity.IsMurdering;
         }
         
         public override void Tick()
@@ -33,6 +35,7 @@ namespace Minigame
             Debug.Log($"{Parent.name} reached target (murderer)");
             if (MurderGame.Instance.MurderHappened(Parent))
             {
+                Parent.Severity = Severity.IsTheMurderer;
                 target.Follow.ReceiveInteraction(Parent);
             }
             
